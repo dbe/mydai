@@ -1,25 +1,35 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
 import './App.css';
 
+import SignInWithBurner from './SignInWithBurner';
+
 class App extends Component {
-  render() {
+  constructor(props) {
+    super(props)
+
+    this.state = {
+      address: undefined
+    }
+  }
+
+  renderSignIn() {
     return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
+      <SignInWithBurner updateAddress={address => this.setState({address}) }/>
+    );
+  }
+
+  render() {
+    let content = this.state.address === undefined ? this.renderSignIn() : <h1>{this.state.address}</h1>;
+
+    return (
+      <div className="content">
+        <div className="row">
+          <div className="col-md-3"></div>
+          <div className="col-md-6 text-center mt-5">
+            {content}
+          </div>
+          <div className="col-md-3"></div>
+        </div>
       </div>
     );
   }
