@@ -6,7 +6,8 @@
     "react": "^16.8.3",
     "react-dom": "^16.8.3",
     "react-scripts": "2.1.5",
-    "sign-in-with-burner": "github:dbe/sign-in-with-burner#mydai"
+    "sign-in-with-burner": "github:dbe/sign-in-with-burner#mydai",
+    "web3": "^1.0.0-beta.46"
   },
   "scripts": {
     "start": "react-scripts start",

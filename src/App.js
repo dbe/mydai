@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import './App.css';
 
 import SignInWithBurner from './SignInWithBurner';
+import Wallet from './Wallet';
 
 class App extends Component {
   constructor(props) {
@@ -18,8 +19,14 @@ class App extends Component {
     );
   }
 
+  renderWallet() {
+    return (
+      <Wallet address={this.state.address} />
+    );
+  }
+
   render() {
-    let content = this.state.address === undefined ? this.renderSignIn() : <h1>{this.state.address}</h1>;
+    let content = this.state.address === undefined ? this.renderSignIn() : this.renderWallet();
 
     return (
       <div className="content">
