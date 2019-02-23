@@ -3,10 +3,6 @@ import React, { Component } from 'react';
 import avatar from './avatar.png';
 
 class Friend extends Component {
-  constructor(props) {
-    super(props);
-  }
-
   renderLastMessage() {
     let {messages} = this.props.attr;
 
@@ -21,7 +17,7 @@ class Friend extends Component {
     return (
       <div className="friend row" key={this.props.attr.address}>
         <div className="col-3">
-          <img className="avatar" src={avatar} />
+          <img alt='' className="avatar" src={avatar} />
         </div>
         <div className="col-9">
           <div className="row">

@@ -6,9 +6,9 @@ import Friend from './Friend';
 class Wallet extends Component {
   constructor(props) {
     super(props);
+    this.web3 = new Web3(new Web3.providers.HttpProvider("https://dai.poa.network"))
 
     this.state = {
-      web3: new Web3(new Web3.providers.HttpProvider("https://dai.poa.network")),
       balance: '0.00',
       friends: [
         {
@@ -24,15 +24,13 @@ class Wallet extends Component {
         {name: 'Bill the banana man', address: '0x70123d7551a036a8ae9c3d370637bd1b161c2800', messages: []},
       ]
     };
+
+    this.fetchBalance();
   }
 
   fetchBalance() {
-    this.state.web3.eth.getBalance(this.props.address).then(weiBalance => {
-      console.log('weiBalance: ', weiBalance);
-
-      let balance = this.state.web3.utils.fromWei(weiBalance);
-
-      console.log('balance: ', balance);
+    this.web3.eth.getBalance(this.props.address).then(weiBalance => {
+      let balance = this.web3.utils.fromWei(weiBalance);
 
       this.setState({balance})
     }).catch(e => {
@@ -43,16 +41,12 @@ class Wallet extends Component {
   renderFriends() {
     return (
       <div id="friends">
-        {this.state.friends.map(friend => <Friend attr={friend } />)}
+        {this.state.friends.map(friend => <Friend key={friend.address} attr={friend } />)}
       </div>
     );
   }
 
   render() {
-    console.log('this.state.web3: ', this.state.web3);
-
-    this.fetchBalance();
-
     return (
       <div>
         <h2 id="balance">{parseFloat(this.state.balance).toFixed(2)} xDAI</h2>
