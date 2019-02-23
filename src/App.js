@@ -31,11 +31,11 @@ class App extends Component {
     return (
       <div className="content">
         <div className="row">
-          <div className="col-md-3"></div>
-          <div className="col-md-6 text-center mt-5">
+          <div className="col-md-4"></div>
+          <div className="col-md-4 text-center m-5 content-card">
             {content}
           </div>
-          <div className="col-md-3"></div>
+          <div className="col-md-4"></div>
         </div>
       </div>
     );

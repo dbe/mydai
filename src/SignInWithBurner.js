@@ -5,9 +5,13 @@ import signIn from 'sign-in-with-burner';
 
 const SignInWithBurner = (props) => {
   return (
-    <button className= "btn btn-primary" id="sign-in" onClick={() => handleClick(props.updateAddress)}>
-      Sign in with Burner
-    </button>
+    <div>
+      <h1>MyDai</h1>
+      <p>send DAI from your burner wallet to friends.</p>
+      <button className= "btn btn-custom" id="sign-in" onClick={() => handleClick(props.updateAddress)}>
+        Sign in with Burner
+      </button>
+    </div>
   );
 }
 
