@@ -2,6 +2,7 @@ body {
   font-family: 'Ropa Sans', sans-serif;
   color: rgb(40, 56, 68);
 }
+
 #root {
   background-image: linear-gradient(to bottom, #0F2027, #203A43, #2C5364);
   height: 100vh;
@@ -28,4 +29,22 @@ body {
   content: "";
   display: block;
   border-bottom: 3px solid rgb(195, 207, 216);
+}
+
+.avatar {
+  width: 80%;
+}
+
+#friends {
+  text-align: left;
+}
+
+.friend {
+
+}
+
+.friend:after {
+  content: "";
+  display: block;
+  border-bottom: 2px solid rgb(195, 207, 216);
 }
