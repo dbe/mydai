@@ -51,6 +51,8 @@ class Wallet extends Component {
       <div>
         <h2 id="balance">{parseFloat(this.state.balance).toFixed(2)} xDAI</h2>
         {this.renderFriends()}
+        <button id='send'>Send</button>
+        <button id='receive'>Receive</button>
       </div>
     );
   }
