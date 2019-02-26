@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import {Link, Route} from 'react-router-dom';
 
 import Web3 from 'web3';
 import Friend from './Friend';
@@ -38,24 +39,30 @@ class Wallet extends Component {
     })
   }
 
-  renderFriends() {
-    return (
-      <div id="friends">
-        {this.state.friends.map(friend => <Friend key={friend.address} attr={friend } />)}
-      </div>
-    );
-  }
-
   render() {
     return (
       <div>
-        <h2 id="balance">{parseFloat(this.state.balance).toFixed(2)} xDAI</h2>
-        {this.renderFriends()}
-        <button id='send'>Send</button>
-        <button id='receive'>Receive</button>
+        <Route path="/" render={() => <Balance balance={this.state.balance}/>} />
+        <Route exact path="/" render={() => <FriendList friends={this.state.friends}/>} />
+        <Route exact path="/" component={Buttons} />
       </div>
     );
   }
+}
+
+const Balance = ({balance}) => <h2 id="balance">{parseFloat(balance).toFixed(2)} xDAI</h2>;
+const Buttons = () => (
+  <div>
+    <button id='send'><Link to="/send">Send</Link></button>
+    <button id='receive'>Receive</button>
+  </div>
+);
+const FriendList = ({friends}) => {
+  return (
+    <div id="friends">
+      {friends.map(friend => <Friend key={friend.address} attr={friend } />)}
+    </div>
+  )
 }
 
 export default Wallet;

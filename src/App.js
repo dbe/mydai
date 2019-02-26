@@ -28,12 +28,12 @@ class App extends Component {
   }
 
   render() {
-
-  // <BrowserRouter>
-  //   <Route exact path="/" />
-  // </BrowserRouter>
     let content = this.state.address === undefined ? this.renderSignIn() : this.renderWallet();
-    return content;
+    return (
+      <BrowserRouter>
+        <Route path="/" render={() => content} />
+      </BrowserRouter>
+    );
   }
 }
 
