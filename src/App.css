@@ -3,7 +3,7 @@ body {
   color: rgb(40, 56, 68);
 }
 
-#root {
+.content {
   background-image: linear-gradient(to bottom, #0F2027, #203A43, #2C5364);
   height: 100vh;
 }

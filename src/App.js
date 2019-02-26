@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import {BrowserRouter, Route} from 'react-router-dom';
+
 import './App.css';
 
 import SignInWithBurner from './SignInWithBurner';
@@ -26,19 +28,12 @@ class App extends Component {
   }
 
   render() {
-    let content = this.state.address === undefined ? this.renderSignIn() : this.renderWallet();
 
-    return (
-      <div className="content">
-        <div className="row">
-          <div className="col-md-4"></div>
-          <div className="col-md-4 text-center m-5 content-card">
-            {content}
-          </div>
-          <div className="col-md-4"></div>
-        </div>
-      </div>
-    );
+  // <BrowserRouter>
+  //   <Route exact path="/" />
+  // </BrowserRouter>
+    let content = this.state.address === undefined ? this.renderSignIn() : this.renderWallet();
+    return content;
   }
 }
 
