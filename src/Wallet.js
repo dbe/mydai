@@ -51,6 +51,7 @@ class Wallet extends Component {
 
         <Route exact path="/send" component={Send} />
         <Route exact path="/send/:address" component={SendTo} />
+        <Route exact path="/confirmation" component={Confirmation} />
       </div>
     );
   }
@@ -61,6 +62,12 @@ const Buttons = () => (
   <div>
     <button id='send'><Link to="/send">Send</Link></button>
     <button id='receive'>Receive</button>
+  </div>
+);
+const Confirmation = () => (
+  <div>
+    <h1>Transaction complete</h1>
+    <Link to='/'>OK</Link>
   </div>
 );
 const FriendList = ({friends}) => {

@@ -4,8 +4,6 @@ class Send extends Component {
   constructor(props) {
     super(props);
 
-    console.log('this (constructor): ', this);
-
     this.onChange = this.onChange.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
 
@@ -15,8 +13,6 @@ class Send extends Component {
   }
 
   onChange(event) {
-    console.log('event: ', event);
-    console.log('this: ', this);
     this.setState({sendTo: event.target.value});
   }
 
@@ -27,7 +23,6 @@ class Send extends Component {
   }
 
   render() {
-    console.log('this.props: ', this.props);
     return (
       <div>
         <h2>Send xDAI to: </h2>

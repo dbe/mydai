@@ -1,11 +1,15 @@
+html, body {
+  height: 100%;
+}
+
 body {
   font-family: 'Ropa Sans', sans-serif;
   color: rgb(40, 56, 68);
 }
 
-.content {
+.container-fluid {
   background-image: linear-gradient(to bottom, #0F2027, #203A43, #2C5364);
-  height: 100vh;
+  min-height: 100vh;
 }
 
 .content-card {
