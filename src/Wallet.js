@@ -3,6 +3,8 @@ import {Link, Route} from 'react-router-dom';
 
 import Web3 from 'web3';
 import Friend from './Friend';
+import Send from './Send';
+import SendTo from './SendTo';
 
 class Wallet extends Component {
   constructor(props) {
@@ -43,8 +45,12 @@ class Wallet extends Component {
     return (
       <div>
         <Route path="/" render={() => <Balance balance={this.state.balance}/>} />
+
         <Route exact path="/" render={() => <FriendList friends={this.state.friends}/>} />
         <Route exact path="/" component={Buttons} />
+
+        <Route exact path="/send" component={Send} />
+        <Route exact path="/send/:address" component={SendTo} />
       </div>
     );
   }
