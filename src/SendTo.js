@@ -5,7 +5,7 @@ class SendTo extends Component {
     super(props);
 
     this.state = {
-      amount: undefined
+      amount: ''
     }
 
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -13,11 +13,17 @@ class SendTo extends Component {
   }
 
   onChange(event) {
+    console.log("In onchange")
     this.setState({amount: event.target.value});
   }
 
   handleSubmit(event) {
     event.preventDefault();
+
+    console.log("In hanldeSubmit")
+    console.log('event: ', event);
+
+    this.props.sendMoney(this.props.address, this.state.amount);
     this.props.history.push(`/confirmation`);
   }
 
@@ -25,9 +31,9 @@ class SendTo extends Component {
     return (
       <form onSubmit={this.handleSubmit}>
         <h2>Sending</h2>
-        <input type="text" placeholder="0" value={this.state.amount} onChange={this.onChange}/>
+        <input type="text" value={this.state.amount} onChange={this.onChange} />
         <h2>xDAI to:</h2>
-        <h3>{this.props.match.params.address}</h3>
+        <h3>{this.props.address}</h3>
         <input type="submit" value="Send" />
       </form>
     )

@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import {Link, Route} from 'react-router-dom';
+import { sign } from 'sign-in-with-burner';
 
 import Web3 from 'web3';
 import Friend from './Friend';
@@ -28,6 +29,8 @@ class Wallet extends Component {
       ]
     };
 
+    this.sendMoney = this.sendMoney.bind(this);
+
     this.fetchBalance();
   }
 
@@ -41,6 +44,35 @@ class Wallet extends Component {
     })
   }
 
+  sendMoney(to, amount) {
+    this.web3.eth.getTransactionCount(this.props.address).then(nonce => {
+      let tx = {
+        to,
+        nonce,
+        gasPrice: this.web3.utils.toWei('1', 'gwei'),
+        gasLimit: 21000,
+        value: amount,
+        chainId: 100
+      }
+
+      sign(tx, {
+        burnerUrl: 'http://localhost:3001',
+        siteName: 'MyDai'
+      }).then(signed => {
+        console.log('signed: ', signed);
+        
+        this.web3.eth.sendSignedTransaction(signed).then(result => {
+          console.log('result: ', result);
+        }).catch(e => {
+          console.log('e: ', e);
+        })
+
+      }).catch(e => {
+        console.log('e: ', e);
+      })
+    })
+  }
+
   render() {
     return (
       <div>
@@ -50,7 +82,17 @@ class Wallet extends Component {
         <Route exact path="/" component={Buttons} />
 
         <Route exact path="/send" component={Send} />
-        <Route exact path="/send/:address" component={SendTo} />
+        <Route exact
+          path="/send/:address"
+          render={({match, history}) => (
+            <SendTo
+              sendMoney={this.sendMoney}
+              address={match.params.address}
+              history={history}
+            />
+          )}
+        />
+
         <Route exact path="/confirmation" component={Confirmation} />
       </div>
     );

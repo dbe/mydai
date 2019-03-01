@@ -10,13 +10,13 @@ class App extends Component {
   constructor(props) {
     super(props)
 
-    // this.state = {
-    //   address: undefined
-    // }
-
     this.state = {
-      address: '0xf48eb3e24bbc12c941eabbca303798bbd8c17bc0'
+      address: undefined
     }
+
+    // this.state = {
+    //   address: '0xf48eb3e24bbc12c941eabbca303798bbd8c17bc0'
+    // }
   }
 
   renderSignIn() {

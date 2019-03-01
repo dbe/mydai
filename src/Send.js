@@ -8,7 +8,7 @@ class Send extends Component {
     this.handleSubmit = this.handleSubmit.bind(this)
 
     this.state = {
-      sendTo: undefined
+      sendTo: ''
     }
   }
 

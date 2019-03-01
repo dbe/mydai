@@ -1,7 +1,7 @@
 import React from 'react';
 import './App.css';
 
-import signIn from 'sign-in-with-burner';
+import { login } from 'sign-in-with-burner';
 
 const SignInWithBurner = (props) => {
   return (
@@ -16,7 +16,7 @@ const SignInWithBurner = (props) => {
 }
 
 function handleClick(updateAddress) {
-  signIn({
+  login({
     // burnerUrl: 'https://xdai.io/login',
     burnerUrl: 'http://localhost:3001',
     // burnerUrl: 'https://buffidai.io/login',
