@@ -56,11 +56,11 @@ class Wallet extends Component {
       }
 
       sign(tx, {
-        burnerUrl: 'http://localhost:3001',
+        burnerUrl: 'https://xdai.io/loginV2',
         siteName: 'MyDai'
       }).then(signed => {
         console.log('signed: ', signed);
-        
+
         this.web3.eth.sendSignedTransaction(signed).then(result => {
           console.log('result: ', result);
         }).catch(e => {

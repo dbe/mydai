@@ -17,9 +17,8 @@ const SignInWithBurner = (props) => {
 
 function handleClick(updateAddress) {
   login({
-    // burnerUrl: 'https://xdai.io/login',
-    burnerUrl: 'http://localhost:3001',
-    // burnerUrl: 'https://buffidai.io/login',
+    burnerUrl: 'https://xdai.io/loginV2',
+    // burnerUrl: 'http://localhost:3001',
     siteName: 'MyDai'
 
   }).then(address => {
