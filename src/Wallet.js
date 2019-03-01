@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
-import {Link, Route} from 'react-router-dom';
+import {Link, Route, withRouter} from 'react-router-dom';
 import { sign } from 'sign-in-with-burner';
+import loader from './loader.gif';
 
 import Web3 from 'web3';
 import Friend from './Friend';
@@ -45,31 +46,40 @@ class Wallet extends Component {
   }
 
   sendMoney(to, amount) {
-    this.web3.eth.getTransactionCount(this.props.address).then(nonce => {
-      let tx = {
-        to,
-        nonce,
-        gasPrice: this.web3.utils.toWei('1', 'gwei'),
-        gasLimit: 21000,
-        value: amount,
-        chainId: 100
-      }
+    return new Promise((resolve, reject) => {
+      try {
+        this.web3.eth.getTransactionCount(this.props.address).then(nonce => {
+          let tx = {
+            to,
+            nonce,
+            gasPrice: this.web3.utils.toWei('1', 'gwei'),
+            gasLimit: 21000,
+            value: amount,
+            chainId: 100
+          }
 
-      sign(tx, {
-        burnerUrl: 'https://xdai.io/loginV2',
-        siteName: 'MyDai'
-      }).then(signed => {
-        console.log('signed: ', signed);
+          let options = {
+            burnerUrl: 'https://xdai.io/loginV2',
+            siteName: 'MyDai'
+          }
 
-        this.web3.eth.sendSignedTransaction(signed).then(result => {
-          console.log('result: ', result);
-        }).catch(e => {
-          console.log('e: ', e);
+          sign(tx, options).then(signed => {
+            this.props.history.push('/processing');
+
+            this.web3.eth.sendSignedTransaction(signed).on('transactionHash', hash => {
+              console.log('hash: ', hash);
+            }).on('receipt', receipt => {
+              console.log('receipt: ', receipt);
+            }).once('confirmation', conf => {
+              this.fetchBalance();
+              resolve()
+            })
+          })
+
         })
-
-      }).catch(e => {
-        console.log('e: ', e);
-      })
+      } catch(e) {
+        reject(e);
+      }
     })
   }
 
@@ -89,17 +99,24 @@ class Wallet extends Component {
               sendMoney={this.sendMoney}
               address={match.params.address}
               history={history}
+              toWei={this.web3.utils.toWei}
             />
           )}
         />
 
+        <Route exact path="/popup" component={Popup} />
+        <Route exact path="/processing" component={Processing} />
         <Route exact path="/confirmation" component={Confirmation} />
       </div>
     );
   }
 }
 
-const Balance = ({balance}) => <h2 id="balance">{parseFloat(balance).toFixed(2)} xDAI</h2>;
+const Balance = ({balance}) => {
+  let formatted = (parseInt(balance*100)/100).toFixed(2)
+  // return <h2 id="balance">{parseFloat(balance).toFixed(2)} xDAI</h2>;
+  return <h2 id="balance">{formatted} xDAI</h2>;
+}
 const Buttons = () => (
   <div>
     <button id='send'><Link to="/send">Send</Link></button>
@@ -119,5 +136,12 @@ const FriendList = ({friends}) => {
     </div>
   )
 }
+const Popup = () => <h1>Please confirm transaction on Burner Wallet</h1>
+const Processing = () => (
+  <div>
+    <h1>Reticulating Splines</h1>
+    <img id="processing" src={loader} alt='' />
+  </div>
+)
 
-export default Wallet;
+export default withRouter(Wallet);

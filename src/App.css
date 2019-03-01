@@ -52,3 +52,7 @@ body {
   display: block;
   border-bottom: 2px solid rgb(195, 207, 216);
 }
+
+#processing {
+  width: 30%;
+}

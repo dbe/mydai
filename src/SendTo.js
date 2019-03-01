@@ -13,18 +13,21 @@ class SendTo extends Component {
   }
 
   onChange(event) {
-    console.log("In onchange")
     this.setState({amount: event.target.value});
   }
 
   handleSubmit(event) {
     event.preventDefault();
 
-    console.log("In hanldeSubmit")
-    console.log('event: ', event);
+    let amount = this.props.toWei(this.state.amount, 'ether');
 
-    this.props.sendMoney(this.props.address, this.state.amount);
-    this.props.history.push(`/confirmation`);
+    this.props.sendMoney(this.props.address, amount).then(ret => {
+      this.props.history.push('/confirmation');
+    }).catch(e => {
+      console.log('e: ', e);
+    })
+
+    this.props.history.push('/popup');
   }
 
   render() {
