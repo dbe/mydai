@@ -16,17 +16,17 @@ class Wallet extends Component {
     this.state = {
       balance: '0.00',
       friends: [
-        {
-          name: 'Banana Sam',
-          address: '0x1192eb327a459584ed86ed4503948b2996e7f628',
-          messages: [
-            {fromFriend: true, type: 'request', amount: 10},
-            {fromFriend: false, type: 'sent', amount: 10},
-            {fromFriend: true, type: 'message', text: "Thanks man! Beers later?"},
-            {fromFriend: false, type: 'message', text: "No Prob, lets do it."},
-          ]
-        },
-        {name: 'Bill the banana man', address: '0x70123d7551a036a8ae9c3d370637bd1b161c2800', messages: []},
+        // {
+        //   name: 'Banana Sam',
+        //   address: '0x1192eb327a459584ed86ed4503948b2996e7f628',
+        //   messages: [
+        //     {fromFriend: true, type: 'request', amount: 10},
+        //     {fromFriend: false, type: 'sent', amount: 10},
+        //     {fromFriend: true, type: 'message', text: "Thanks man! Beers later?"},
+        //     {fromFriend: false, type: 'message', text: "No Prob, lets do it."},
+        //   ]
+        // },
+        // {name: 'Bill the banana man', address: '0x70123d7551a036a8ae9c3d370637bd1b161c2800', messages: []},
       ]
     };
 
