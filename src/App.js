@@ -11,17 +11,24 @@ class App extends Component {
     super(props)
 
     this.state = {
-      address: undefined
+      address: window.localStorage.getItem('address') || undefined
     }
 
     // this.state = {
     //   address: '0xf48eb3e24bbc12c941eabbca303798bbd8c17bc0'
     // }
+
+    this.updateAddress = this.updateAddress.bind(this)
+  }
+
+  updateAddress(address) {
+    window.localStorage.setItem('address', address)
+    this.setState({address})
   }
 
   renderSignIn() {
     return (
-      <SignInWithBurner updateAddress={address => this.setState({address}) }/>
+      <SignInWithBurner updateAddress={this.updateAddress}/>
     );
   }
 

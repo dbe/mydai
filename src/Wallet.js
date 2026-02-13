@@ -114,7 +114,6 @@ class Wallet extends Component {
 
 const Balance = ({balance}) => {
   let formatted = (parseInt(balance*100)/100).toFixed(2)
-  // return <h2 id="balance">{parseFloat(balance).toFixed(2)} xDAI</h2>;
   return <h2 id="balance">{formatted} xDAI</h2>;
 }
 const Buttons = () => (
